@@ -1,14 +1,14 @@
 public abstract class Sala {
     private String nome;
     private int qtdLugares;
-    private int qtdPessoas;
-    private final Bilhete bilhetes;
+    private float precoBilhete;
+    private int qtdBilhetesVendidos;
 
-    public Sala(String nome, int qtdLugares, float preco) {
+    public Sala(String nome, int qtdLugares) {
         this.nome = nome;
         this.qtdLugares = qtdLugares;
-        this.qtdPessoas = 0;
-        this.bilhetes = new Bilhete(preco);
+        this.precoBilhete = 12;
+        this.qtdBilhetesVendidos = 0;
     }
 
     public void reservarCadeira() {
@@ -16,18 +16,29 @@ public abstract class Sala {
             System.out.println("A sala está cheia!");
         } else {
             this.setQtdLugares(this.getQtdLugares() - 1);
-            this.getBilhetes().setBilhetesVendidos(this.getBilhetes().getBilhetesVendidos() + 1);
-            this.setQtdPessoas(this.getQtdPessoas() + 1);
+            this.setQtdBilhetesVendidos(this.getQtdBilhetesVendidos() + 1);
             System.out.println("Lugar na sala " + this.getNome() + " reservado!");
         }
     }
 
-    public int getQtdPessoas() {
-        return qtdPessoas;
+    public float getLucro() {
+        return this.getPrecoBilhete() * this.getQtdBilhetesVendidos();
     }
 
-    public void setQtdPessoas(int qtdPessoas) {
-        this.qtdPessoas = qtdPessoas;
+    public float getPrecoBilhete() {
+        return precoBilhete;
+    }
+
+    public void setPrecoBilhete(float precoBilhete) {
+        this.precoBilhete = precoBilhete;
+    }
+
+    public int getQtdBilhetesVendidos() {
+        return qtdBilhetesVendidos;
+    }
+
+    public void setQtdBilhetesVendidos(int qtdBilhetesVendidos) {
+        this.qtdBilhetesVendidos = qtdBilhetesVendidos;
     }
 
     public String getNome() {
@@ -44,9 +55,5 @@ public abstract class Sala {
 
     public void setQtdLugares(int qtdLugares) {
         this.qtdLugares = qtdLugares;
-    }
-
-    public Bilhete getBilhetes() {
-        return bilhetes;
     }
 }
